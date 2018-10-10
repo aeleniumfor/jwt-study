@@ -17,12 +17,12 @@ func main() {
 		"test",
 		true,
 		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Minute * 30).Unix(), //有効期限を有効にしておく
+			ExpiresAt: time.Now().Add(time.Minute * 30).Unix(), //有効期限をを発行しておく
 		},
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	// Secretで文字列にする. このSecretはサーバだけが知っている
-	tokenstring, _ := token.SignedString([]byte("secret"))
+	j := jwt.NewWithClaims(jwt.SigningMethodHS256, claims) // Secretで文字列にする. このSecretはサーバだけが知っている
 
-	fmt.Println(tokenstring)
+	token, _ := j.SignedString([]byte("secret")) //学習用なのでerr処理は飛ばす
+
+	fmt.Println(token)
 }
